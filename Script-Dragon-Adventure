@@ -1,0 +1,492 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CoreGui = game:GetService("CoreGui")
+local HttpService = game:GetService("HttpService")
+local VirtualUser = game:GetService("VirtualUser")
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local StarterGui = game:GetService("StarterGui")
+
+local Player = Players.LocalPlayer
+
+local GetConnections = function(A, B)
+    for i,v in pairs(getconnections(A[tostring(B)])) do
+        v:Fire()
+    end 
+end
+
+Player.PlayerGui.NodeGui.BoostFrame.ChildAdded:Connect(
+    function(v)
+        if v:IsA("Frame") and v:FindFirstChild("ClickButton") then
+            wait(0.5)
+            GetConnections(v.ClickShadowButton,"MouseButton1Down") 
+        end
+    end
+)
+
+local GetConnections = function(A, B)
+    for i,v in pairs(getconnections(A[tostring(B)])) do
+        v:Fire()
+    end 
+end 
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("NOS HUB | Dragon Adventures", "DarkTheme")
+
+--Event
+
+local Event = Window:NewTab("Event")
+local EventSection = Event:NewSection("Event")
+
+EventSection:NewToggle("TP EventEgg", "" ,function(TPEventEgg)
+_G.TPEventEgg = TPEventEgg
+    while _G.TPEventEgg do wait()
+        pcall(function()
+    for i,v in pairs(workspace.Interactions.Nodes.Harvest.EventEggs.ActiveNodes:GetDescendants()) do
+     if _G.TPEventEgg then
+        if v.Name == "Egg" then
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+
+EventSection:NewToggle("Esp EventEgg", "" ,function(EspEgg)
+_G.EspEgg = EspEgg
+    while _G.EspEgg do wait()
+        pcall(function()
+for i,v in pairs(workspace.Interactions.Nodes.Harvest.EventEggs.ActiveNodes:GetChildren()) do
+    if _G.EspEgg then
+          if not v:FindFirstChild  "gui" then
+ 
+gui = Instance.new("BillboardGui",v)
+gui.Name = "gui"
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Active = true
+gui.AlwaysOnTop = true
+gui.LightInfluence = 1
+gui.Size = UDim2.new(0, 90, 0, 50)
+
+local esp = Instance.new("TextLabel",gui)
+esp.Name = "esp"
+esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+esp.BackgroundTransparency = 1
+esp.Position = UDim2.new(0.08, 0, 0.1, 0)
+esp.Size = UDim2.new(0, 50, 0, 50)
+esp.Font = Enum.Font.FredokaOne
+esp.Text = v.Name
+esp.TextColor3 = Color3.fromRGB(255, 255, 255)
+esp.TextScaled = true
+esp.TextSize = 5
+esp.TextStrokeTransparency = 0.000
+esp.TextWrapped = true
+         end
+     else
+         if v:FindFirstChild  "gui" then
+             v:FindFirstChild  "gui":Destroy()
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+EventSection:NewToggle("Esp Bunny", "" ,function(EspBunny)
+_G.EspBunny = EspBunny
+    while _G.EspBunny do wait()
+        pcall(function()
+for i,v in pairs(workspace.Interactions.Nodes.Harvest.EventResources.ActiveNodes:GetChildren()) do
+    if _G.EspBunny then
+          if not v:FindFirstChild  "gui" then
+ 
+gui = Instance.new("BillboardGui",v)
+gui.Name = "gui"
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Active = true
+gui.AlwaysOnTop = true
+gui.LightInfluence = 1
+gui.Size = UDim2.new(0, 90, 0, 50)
+
+local esp = Instance.new("TextLabel",gui)
+esp.Name = "esp"
+esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+esp.BackgroundTransparency = 1
+esp.Position = UDim2.new(0.08, 0, 0.1, 0)
+esp.Size = UDim2.new(0, 50, 0, 50)
+esp.Font = Enum.Font.FredokaOne
+esp.Text = v.Name
+esp.TextColor3 = Color3.fromRGB(255, 255, 0)
+esp.TextScaled = true
+esp.TextSize = 5
+esp.TextStrokeTransparency = 0.000
+esp.TextWrapped = true
+         end
+     else
+         if v:FindFirstChild  "gui" then
+             v:FindFirstChild  "gui":Destroy()
+                    end
+                end
+            end
+        end)
+    end
+end)
+    
+--Main
+
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewToggle("Auto Farm Egg", "" ,function(farmegg)
+_G.farmegg = farmegg
+    while _G.farmegg do wait()
+        pcall(function()
+    for i,v in pairs(workspace.Interactions.Nodes.Harvest.Eggs.ActiveNodes:GetDescendants()) do
+     if _G.farmegg then
+        if v.Name == "Egg" then
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+      
+local cl = getrawmetatable(game);
+make_writeable(cl);
+local old_index = cl.__index;
+local namep = game.Players.LocalPlayer
+
+cl.__index = function(a, b)
+    if tostring(a) == "CurrentPlayer" then
+        if tostring(b) == "Value" then
+            return namep;
+        end
+    end
+    return old_index(a, b);
+    end
+cl.__index = function(a, b)
+    if tostring(a) == "Harvested" then
+        if tostring(b) == "Value" then
+            return true;
+        end
+    end
+    return old_index(a, b);
+    end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+MainSection:NewToggle("Auto Fishing", "" ,function(fishing)
+_G.fishing = fishing
+spawn(
+    function()
+        while fishing do
+            wait()
+            pcall(function()
+            local Fish = require(ReplicatedStorage["_replicationFolder"].FishingClient)
+
+            local StartCasting = Fish.StartCasting
+            local Click = Fish.Click
+            StartCasting(Fish, StartCasting)
+
+            if Fish.Snagged == true then
+                Fish.ReelSignal:Fire()
+
+                if
+                    Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.PointerLabel.Position.X.Scale <=
+                        Player.PlayerGui.FishingGui.ContainerFrame.ReelingFrame.BarLabel.InnerLabel.SafeBarLabel.Position.X.Scale +
+                            .02
+                 then
+                    Click(Fish, Fish.Click)
+                end
+            end
+            end)
+        end
+    end
+)
+end)
+
+--Esp
+
+local Esp = Window:NewTab("Esp")
+local EspSection = Esp:NewSection("Esp")
+
+EspSection:NewToggle("Esp Player", "" ,function(EspPlayer)
+_G.EspPlayer = EspPlayer
+    while _G.EspPlayer do wait()
+        pcall(function()
+       for i,v in pairs(game.Players:GetChildren()) do
+           if _G.EspPlayer then
+            if not v.Character.HumanoidRootPart:FindFirstChild "gui" then
+            
+gui = Instance.new("BillboardGui",v.Character.HumanoidRootPart)
+gui.Name = "gui"
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Active = true
+gui.AlwaysOnTop = true
+gui.LightInfluence = 1
+gui.Size = UDim2.new(0, 100, 0, 50)
+
+local esp = Instance.new("TextLabel",gui)
+esp.Name = "esp"
+esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+esp.BackgroundTransparency = 1
+esp.Position = UDim2.new(0.08, 0, 0.1, 0)
+esp.Size = UDim2.new(0, 100, 0, 50)
+esp.Font = Enum.Font.FredokaOne
+esp.Text = v.Name
+esp.TextColor3 = Color3.fromRGB(0, 255, 0)
+esp.TextScaled = true
+esp.TextSize = 5
+esp.TextStrokeTransparency = 0.000
+esp.TextWrapped = true
+         end
+     else
+         if v.Character.HumanoidRootPart:FindFirstChild "gui" then
+             v.Character.HumanoidRootPart:FindFirstChild "gui":Destroy()
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+EspSection:NewToggle("Esp Egg", "" ,function(EspEgg)
+_G.EspEgg = EspEgg
+    while _G.EspEgg do wait()
+        pcall(function()
+for i,v in pairs(workspace.Interactions.Nodes.Harvest.Eggs.ActiveNodes:GetChildren()) do
+    if _G.EspEgg then
+          if not v:FindFirstChild  "gui" then
+ 
+gui = Instance.new("BillboardGui",v)
+gui.Name = "gui"
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Active = true
+gui.AlwaysOnTop = true
+gui.LightInfluence = 1
+gui.Size = UDim2.new(0, 90, 0, 50)
+
+local esp = Instance.new("TextLabel",gui)
+esp.Name = "esp"
+esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+esp.BackgroundTransparency = 1
+esp.Position = UDim2.new(0.08, 0, 0.1, 0)
+esp.Size = UDim2.new(0, 50, 0, 50)
+esp.Font = Enum.Font.FredokaOne
+esp.Text = v.Name
+esp.TextColor3 = Color3.fromRGB(255, 255, 255)
+esp.TextScaled = true
+esp.TextSize = 5
+esp.TextStrokeTransparency = 0.000
+esp.TextWrapped = true
+         end
+     else
+         if v:FindFirstChild  "gui" then
+             v:FindFirstChild  "gui":Destroy()
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+--Player
+
+    local Player = Window:NewTab("Player")
+    local PlayerSection = Player:NewSection("Player")
+    
+PlayerSection:NewToggle("Super Man", "" ,function(Super)
+_G.Super = Super
+    while _G.Super do wait()
+    if _G.Super then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 150
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 150
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+        end
+    end
+end)
+
+PlayerSection:NewToggle("H Fly", "ToggleInfo", function(fly)
+    local Max = 0
+local LP = Players.LocalPlayer
+local Mouse = LP:GetMouse()
+Mouse.KeyDown:connect(
+    function(k)
+        if k:lower() == "h" and fly then
+            Max = Max + 1
+            getgenv().Fly = false
+            if fly then
+                local T = LP.Character:FindFirstChild("UpperTorso",true) or LP.Character:FindFirstChild("HumanoidRootPart",true)
+                local S = {
+                    F = 0,
+                    B = 0,
+                    L = 0,
+                    R = 0
+                }
+                local S2 = {
+                    F = 0,
+                    B = 0,
+                    L = 0,
+                    R = 0
+                }
+                local SPEED = 5
+                local function FLY()
+                    getgenv().Fly = true
+                    local BodyGyro = Instance.new("BodyGyro", T)
+                    local BodyVelocity = Instance.new("BodyVelocity", T)
+                    BodyGyro.P = 9e4
+                    BodyGyro.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+                    BodyGyro.cframe = T.CFrame
+                    BodyVelocity.velocity = Vector3.new(0, 0, 0)
+                    BodyVelocity.maxForce = Vector3.new(9e9, 9e9, 9e9)
+                    spawn(
+                        function()
+                            repeat
+                                wait()
+                                LP.Character.Humanoid.PlatformStand = true
+                                if S.L + S.R ~= 0 or S.F + S.B ~= 0 then
+                                    SPEED = 500
+                                elseif not (S.L + S.R ~= 0 or S.F + S.B ~= 0) and SPEED ~= 0 then
+                                    SPEED = 0
+                                end
+                                if (S.L + S.R) ~= 0 or (S.F + S.B) ~= 0 then
+                                    BodyVelocity.velocity =
+                                        ((Workspace.CurrentCamera.CoordinateFrame.lookVector * (S.F + S.B)) +
+                                        ((Workspace.CurrentCamera.CoordinateFrame *
+                                            CFrame.new(S.L + S.R, (S.F + S.B) * 0.2, 0).p) -
+                                            Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                        SPEED
+                                    S2 = {
+                                        F = S.F,
+                                        B = S.B,
+                                        L = S.L,
+                                        R = S.R
+                                    }
+                                elseif (S.L + S.R) == 0 and (S.F + S.B) == 0 and SPEED ~= 0 then
+                                    BodyVelocity.velocity =
+                                        ((Workspace.CurrentCamera.CoordinateFrame.lookVector * (S2.F + S2.B)) +
+                                        ((Workspace.CurrentCamera.CoordinateFrame *
+                                            CFrame.new(S2.L + S2.R, (S2.F + S2.B) * 0.2, 0).p) -
+                                            Workspace.CurrentCamera.CoordinateFrame.p)) *
+                                        SPEED
+                                else
+                                    BodyVelocity.velocity = Vector3.new(0, 0.1, 0)
+                                end
+                                BodyGyro.cframe = Workspace.CurrentCamera.CoordinateFrame
+                            until not getgenv().Fly
+                            S = {
+                                F = 0,
+                                B = 0,
+                                L = 0,
+                                R = 0
+                            }
+                            S2 = {
+                                F = 0,
+                                B = 0,
+                                L = 0,
+                                R = 0
+                            }
+                            SPEED = 0
+                            BodyGyro:destroy()
+                            BodyVelocity:destroy()
+                            LP.Character.Humanoid.PlatformStand = false
+                        end
+                    )
+                end
+                Mouse.KeyDown:connect(
+                    function(k)
+                        if k:lower() == "w" then
+                            S.F = 1
+                        elseif k:lower() == "s" then
+                            S.B = -1
+                        elseif k:lower() == "a" then
+                            S.L = -1
+                        elseif k:lower() == "d" then
+                            S.R = 1
+                        end
+                    end
+                )
+                Mouse.KeyUp:connect(
+                    function(k)
+                        if k:lower() == "w" then
+                            S.F = 0
+                        elseif k:lower() == "s" then
+                            S.B = 0
+                        elseif k:lower() == "a" then
+                            S.L = 0
+                        elseif k:lower() == "d" then
+                            S.R = 0
+                        end
+                    end
+                )
+                FLY()
+                if Max == 2 then
+                    getgenv().Fly = false
+                    Max = 0
+                end
+            end
+        end
+    end
+)
+end)
+ 
+--Dragon
+ 
+    local Dragon = Window:NewTab("Dragon")
+    local DragonSection = Dragon:NewSection("Dragon")
+ 
+DragonSection:NewButton("Speed Dragon", "", function()
+local cl = getrawmetatable(game);
+make_writeable(cl);
+local old_index = cl.__index;
+
+cl.__index = function(a, b)
+    if tostring(a) == "FlySpeed" then
+        if tostring(b) == "Value" then
+            return 1000000000000;
+        end
+    end
+    if tostring(a) == "WalkSpeed" then
+        if tostring(b) == "Value" then
+            return 1000000000000;
+        end
+    end
+    return old_index(a, b);
+    end
+end)
+
+DragonSection:NewButton("Easy Turn", "", function()
+local cl = getrawmetatable(game);
+make_writeable(cl);
+local old_index = cl.__index;
+
+cl.__index = function(a, b)
+    if tostring(a) == "BG" then
+        if tostring(b) == "D" then
+            return 250;
+        end
+    end
+    if tostring(a) == "BG" then
+        if tostring(b) == "P" then
+            return 4000;
+        end
+    end
+    return old_index(a, b);
+    end
+end)
+ 
+--Other
+ 
+    local Other = Window:NewTab("Other")
+    local OtherSection = Other:NewSection("Other")
+ 
+    OtherSection:NewButton("Rejoin Server", "", function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+    end)
+
+OtherSection:NewKeybind("KeybindText", "", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+end)
