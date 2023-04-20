@@ -35,21 +35,21 @@ G.Idled = Player.Idled
 
 local Name = game.PlaceId .. ".json"
 local Des = {}
-if makefolder and not isfile("NOS Hub") then
-    makefolder("NOS Hub")
+if makefolder and not isfile("NOSHUB") then
+    makefolder("NOSHUB")
 end 
 
 G.Settings = {}
 local Pcall = pcall(function()
-    if isfile("NOS Hub//" .. Name) then
-        readfile("NOS Hub//" .. Name)
+    if isfile("NOSHUB//" .. Name) then
+        readfile("NOSHUB//" .. Name)
     else 
-        writefile("NOS Hub//" .. Name, HttpService:JSONEncode(Des))
+        writefile("NOSHUB//" .. Name, HttpService:JSONEncode(Des))
     end 
 end)
 
-if isfile("NOS Hub//" .. Name) and readfile("NOS Hub//" .. Name) then
-    Settings = HttpService:JSONDecode(readfile("NOS Hub//" .. Name))
+if isfile("NOSHUB//" .. Name) and readfile("NOSHUB//" .. Name) then
+    Settings = HttpService:JSONDecode(readfile("NOSHUB//" .. Name))
 end 
 
 
@@ -146,7 +146,7 @@ end
 
 G.Save = function()
     pcall(function()
-        writefile("NOS Hub//" .. Name, HttpService:JSONEncode(Settings))
+        writefile("NOSHUB//" .. Name, HttpService:JSONEncode(Settings))
     end)
 end 
 
