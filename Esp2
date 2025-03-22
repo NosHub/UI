@@ -40,10 +40,6 @@ local ESP = {
     Objects = {} -- Table of ESP objects that you can read and do fun stuff with, however, editing settings changes the settings for every object at the same time so this is only needed if you want to set settings for individual targets.
 }
 
-
-
-
-
 -- Initial functions for the lib that are used in functions like GetQuad, DrawQuad, Etc.
 
 local function Draw(Type, Properties) -- Manually writing every property and Drawing.new() is extremely painful, making it a table is bazed. I definitely didn't steal this idea from ic3w0lf.
@@ -476,11 +472,5 @@ function Object:Refresh()
         self.Objects.Tracer.Visible = false
     end
 end
-
-game.RunService.Stepped:Connect(function()
-    for i, Object in next, ESP.Objects do
-        Object:Refresh()
-    end
-end)
 
 return ESP
