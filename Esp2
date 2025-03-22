@@ -4,7 +4,7 @@
 local Players = game:GetService("Players")
 
 local ESP = {
-    Enabled = true,
+    Enabled = false,
     Settings = {
         RemoveOnDeath = true,
         MaxDistance = 300, -- Max Distance for esp to render (IN METERS).
@@ -15,24 +15,24 @@ local ESP = {
         BoxTopOffset = Vector3.new(0, 1, 0), -- Offset for where the top of the box should be
         
         Boxes = {
-            Enabled = true,
+            Enabled = false,
             Color = Color3.new(1, 0, 1),
             Thickness = 1,
         },
         Names = {
             Distance = true,
             Health = true, -- Adds health values to the nametag.
-            Enabled = true,
-            Resize = true, -- Resizes the text based on the distance from the camera to the player so text doesn't get ridiculously large the further you are from the target.
+            Enabled = false,
+            Resize = false, -- Resizes the text based on the distance from the camera to the player so text doesn't get ridiculously large the further you are from the target.
             ResizeWeight = 0.05, -- How quickly names are resized based on the distance from the camera.
-            Color = Color3.new(1, 1, 1),
+            Color = Color3.new(0, 255, 0),
             Size = 18,
             Font = 1,
             Center = true,
             Outline = true,
         },
         Tracers = {
-            Enabled = true,
+            Enabled = false,
             Thickness = 0,
             Color = Color3.new(1, 0, 1),
         }
