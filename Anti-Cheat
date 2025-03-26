@@ -72,25 +72,6 @@ local Disables = {
     Idled
 }
 
-
-local OldNameCall = nil
-OldNameCall = hookmetamethod(game, "__namecall", function(...)
-    local Args = {...}
-    local A, B, C = ...
-
-    if table.find(Yes, getnamecallmethod()) and A == Player then
-        return 
-    end 
-    if table.find(Nos, getnamecallmethod()) then
-        return  
-    end 
-    if type(A) ~= "Instance" then
-        return OldNameCall(...)
-    end 
-    return OldNameCall(...)
-end)
-
-
 if setfflag then
     setfflag("HumanoidParallelRemoveNoPhysics", "False")
     setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
