@@ -1,0 +1,107 @@
+repeat wait() until game:IsLoaded()
+
+local G = getgenv and getgenv() or _G or shared
+local Table = {
+    185655149,
+    606849621
+}
+if table.find(Table, game.PlaceId) then
+    wait(3)
+end
+
+G.Get =
+    setmetatable(
+    {},
+    {
+        __index = function(A, B)
+            return game:GetService(B)
+        end
+    }
+)
+for i,v in pairs(game.GetChildren(game)) do
+    G[v.ClassName] = v
+end 
+
+G.Player = Players.LocalPlayer
+G.wait = task.wait 
+G.spawn = task.spawn
+G.Heartbeat = RunService.Heartbeat
+G.Stepped = RunService.Stepped
+G.RenderStepped = RunService.RenderStepped
+G.Error = ScriptContext.Error
+G.MessageOut = LogService.MessageOut
+G.Kick = Player.Kick
+G.Idled = Player.Idled 
+
+local Name = game.PlaceId .. ".json"
+local Des = {}
+if makefolder and not isfile("NOSHUB") then
+    makefolder("NOSHUB")
+end 
+
+G.Settings = {}
+local Pcall = pcall(function()
+    if isfile("NOSHUB//" .. Name) then
+        readfile("NOSHUB//" .. Name)
+    else 
+        writefile("NOSHUB//" .. Name, HttpService:JSONEncode(Des))
+    end 
+end)
+
+if isfile("NOSHUB//" .. Name) and readfile("NOSHUB//" .. Name) then
+    Settings = HttpService:JSONDecode(readfile("NOSHUB//" .. Name))
+end 
+
+
+local Nos = {
+    "PreloadAsync",
+    "xpcall",
+    "gcinfo",
+    "collectgarbage",
+    "FindService",
+}
+
+local Yes = {
+    "Kick",
+    "kick",
+}
+
+local Disables = {
+    Error,
+    MessageOut,
+    Idled
+}
+
+if setfflag then
+    setfflag("HumanoidParallelRemoveNoPhysics", "False")
+    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+end
+if setfpscap then
+    setfpscap(100)
+end
+
+ScriptContext:SetTimeout(0.5)
+
+G.GetFunction = function(A)
+    for i,v in pairs(getgc()) do
+        if type(v) == "function" and getinfo(v).name == tostring(A) then
+            A = v 
+        end 
+    end 
+    return A 
+end
+
+G.ScriptFunction = function(A, B) 
+    for i,v in pairs(getgc()) do
+        if type(v) == "function" and getinfo(v).name == tostring(A) and getcallingscript() == B then 
+            A = v 
+        end 
+    end 
+    return A, B 
+end
+
+G.Save = function()
+    pcall(function()
+        writefile("NOSHUB//" .. Name, HttpService:JSONEncode(Settings))
+    end)
+end 
