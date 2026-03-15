@@ -8,7 +8,7 @@ local InterfaceManager = {} do
         Transparency = true,
         MenuKeybind = "LeftAlt"
     }
-
+ 
     function InterfaceManager:SetLibrary(Library)
         self.Library = Library
     end
