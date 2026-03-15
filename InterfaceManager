@@ -9,48 +9,37 @@ local InterfaceManager = {} do
         MenuKeybind = "LeftAlt"
     }
 
+    function InterfaceManager:SetLibrary(Library)
+        self.Library = Library
+    end
+
     function InterfaceManager:SetFolder(folder)
-		self.Folder = folder;
-		self:BuildFolderTree()
-	end
+        self.Folder = folder
 
-    function InterfaceManager:SetLibrary(library)
-		self.Library = library
-	end
-
-    function InterfaceManager:BuildFolderTree()
-		local paths = {}
-
-		local parts = self.Folder:split("/")
-		for idx = 1, #parts do
-			paths[#paths + 1] = table.concat(parts, "/", 1, idx)
-		end
-
-		table.insert(paths, self.Folder)
-		table.insert(paths, self.Folder .. "/")
-
-		for i = 1, #paths do
-			local str = paths[i]
-			if not isfolder(str) then
-				makefolder(str)
-			end
-		end
-	end
+        if not isfolder(folder) then
+            makefolder(folder)
+        end
+    end
 
     function InterfaceManager:SaveSettings()
-        writefile(self.Folder .. "/options.json", httpService:JSONEncode(InterfaceManager.Settings))
+        if not isfolder(self.Folder) then
+            makefolder(self.Folder)
+        end
+
+        writefile(
+            self.Folder .. "/options.json",
+            HttpService:JSONEncode(self.Settings)
+        )
     end
 
     function InterfaceManager:LoadSettings()
         local path = self.Folder .. "/options.json"
-        if isfile(path) then
-            local data = readfile(path)
-            local success, decoded = pcall(httpService.JSONDecode, httpService, data)
 
-            if success then
-                for i, v in next, decoded do
-                    InterfaceManager.Settings[i] = v
-                end
+        if isfile(path) then
+            local data = HttpService:JSONDecode(readfile(path))
+
+            for k,v in pairs(data) do
+                self.Settings[k] = v
             end
         end
     end
