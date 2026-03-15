@@ -1,7 +1,9 @@
 local httpService = game:GetService("HttpService")
+local playername = game.Players.LocalPlayer.Name
+local gameid = game.GameId
 
 local SaveManager = {} do
-	SaveManager.Folder = "NOSHub"
+	SaveManager.Folder = "NOSHub/"..gameid.."/"..playername
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
