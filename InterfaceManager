@@ -1,12 +1,12 @@
 local httpService = game:GetService("HttpService")
 
 local InterfaceManager = {} do
-	InterfaceManager.Folder = "NOSettings"
+	InterfaceManager.Folder = "NOSHub"
     InterfaceManager.Settings = {
-        Theme = "Dark",
+        Theme = "Darker",
         Acrylic = true,
         Transparency = true,
-        MenuKeybind = "LeftControl"
+        MenuKeybind = "LeftLeftAlt"
     }
 
     function InterfaceManager:SetFolder(folder)
@@ -27,7 +27,7 @@ local InterfaceManager = {} do
 		end
 
 		table.insert(paths, self.Folder)
-		table.insert(paths, self.Folder .. "/settings")
+		table.insert(paths, self.Folder .. "/")
 
 		for i = 1, #paths do
 			local str = paths[i]
