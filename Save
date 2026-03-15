@@ -1,0 +1,68 @@
+local SaveManager = {}
+SaveManager.Folder = "NOSHub"
+SaveManager.Library = nil
+
+local HttpService = game:GetService("HttpService")
+
+function SaveManager:SetLibrary(lib)
+    self.Library = lib
+end
+
+function SaveManager:SetFolder(folder)
+    self.Folder = folder
+end
+
+function SaveManager:BuildFolderTree()
+    if not isfolder("NOSHub") then
+        makefolder("NOSHub")
+    end
+
+    local parts = string.split(self.Folder,"/")
+    local path = ""
+
+    for _,v in ipairs(parts) do
+        path = path .. (path == "" and v or "/"..v)
+
+        if not isfolder(path) then
+            makefolder(path)
+        end
+    end
+end
+
+function SaveManager:Save(name)
+    if not self.Library then return end
+
+    self:BuildFolderTree()
+
+    local data = {}
+
+    for i,v in pairs(self.Library.Options) do
+        pcall(function()
+            data[i] = v.Value
+        end)
+    end
+
+    local path = self.Folder.."/"..name..".json"
+
+    writefile(path,HttpService:JSONEncode(data))
+end
+
+function SaveManager:Load(name)
+    local path = self.Folder.."/"..name..".json"
+
+    if not isfile(path) then
+        return
+    end
+
+    local data = HttpService:JSONDecode(readfile(path))
+
+    for i,v in pairs(data) do
+        if self.Library.Options[i] then
+            pcall(function()
+                self.Library.Options[i]:SetValue(v)
+            end)
+        end
+    end
+end
+
+return SaveManager
