@@ -1,6 +1,7 @@
 local SaveManager = {}
 SaveManager.Folder = "NOSHub"
 SaveManager.Library = nil
+SaveManager.ExtraData = {}
 
 local HttpService = game:GetService("HttpService")
 
@@ -10,6 +11,10 @@ end
 
 function SaveManager:SetFolder(folder)
     self.Folder = folder
+end
+
+function SaveManager:SetExtraData(data)
+    self.ExtraData = data or {}
 end
 
 function SaveManager:BuildFolderTree()
@@ -42,6 +47,8 @@ function SaveManager:Save(name)
         end)
     end
 
+    data["_extra"] = self.ExtraData
+
     local path = self.Folder.."/"..name..".json"
 
     writefile(path,HttpService:JSONEncode(data))
@@ -57,11 +64,15 @@ function SaveManager:Load(name)
     local data = HttpService:JSONDecode(readfile(path))
 
     for i,v in pairs(data) do
-        if self.Library.Options[i] then
+        if i ~= "_extra" and self.Library.Options[i] then
             pcall(function()
                 self.Library.Options[i]:SetValue(v)
             end)
         end
+    end
+
+    if data["_extra"] then
+        self.ExtraData = data["_extra"]
     end
 end
 
